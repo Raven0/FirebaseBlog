@@ -8,14 +8,15 @@
 
     <ImageButton
         android:id="@+id/btnImage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxHeight="230dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
+        android:background="#00ffffff"
         android:scaleType="centerCrop"
-        app:srcCompat="@mipmap/add_btn" />
+        android:src="@mipmap/add_btn" />
 
     <EditText
         android:id="@+id/tbTitle"
