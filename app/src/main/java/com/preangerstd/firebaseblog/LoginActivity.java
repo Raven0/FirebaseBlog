@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = (Button) findViewById(R.id.btnRegister);
         mAuth = FirebaseAuth.getInstance();
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User");
+        mDatabaseUser.keepSynced(true);
         dialog = new ProgressDialog(this);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(mainIntent);
                 }else {
-                    Toast.makeText(LoginActivity.this, "Setup your Account", Toast.LENGTH_LONG).show();
+                    Intent setupIntent = new Intent(LoginActivity.this, SetupActivity.class);
+                    setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(setupIntent);
                 }
             }
 
