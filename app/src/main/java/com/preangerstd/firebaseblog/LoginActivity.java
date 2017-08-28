@@ -1,5 +1,6 @@
 package com.preangerstd.firebaseblog;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,7 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText tbEmail,tbPass;
     private Button btnLogin, btnRegister;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabaseUser;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("User");
+        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User");
+        dialog = new ProgressDialog(this);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,16 +58,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkLogin() {
+        dialog.setMessage("Logging in");
         String email = tbEmail.getText().toString().trim();
         String pass = tbPass.getText().toString().trim();
 
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass)){
+            dialog.show();
             mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+                        dialog.dismiss();
                         checkUserExist();
                     } else {
+                        dialog.dismiss();
                         Toast.makeText(LoginActivity.this, "Error Login", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -75,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     private void checkUserExist() {
         final String userid = mAuth.getCurrentUser().getUid();
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabaseUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(userid)){
