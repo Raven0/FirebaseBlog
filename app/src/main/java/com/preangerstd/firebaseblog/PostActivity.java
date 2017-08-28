@@ -62,10 +62,10 @@ public class PostActivity extends AppCompatActivity {
 
     private void startPosting() {
         progressDialog.setMessage("Uploading");
-        progressDialog.show();
         final String title_val = tbTitle.getText().toString().trim();
         final String desc_val = tbContent.getText().toString().trim();
         if(!TextUtils.isEmpty(title_val) && !TextUtils.isEmpty(desc_val) && imageUri != null){
+            progressDialog.show();
             StorageReference filepath = storage.child("Image_Post").child(imageUri.getLastPathSegment());
 
             filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
