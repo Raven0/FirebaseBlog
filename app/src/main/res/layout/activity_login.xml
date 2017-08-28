@@ -4,23 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.preangerstd.firebaseblog.RegisterActivity">
-
-    <EditText
-        android:id="@+id/tbUname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/input_outline"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:selectAllOnFocus="false"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    tools:context="com.preangerstd.firebaseblog.LoginActivity">
 
     <EditText
         android:id="@+id/tbEmail"
@@ -57,10 +41,10 @@
         android:layout_marginTop="20dp"/>
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Login"
         android:textColor="@android:color/white"
         android:layout_centerHorizontal="true"
         android:background="@color/colorPrimary"
@@ -68,4 +52,18 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:layout_below="@id/btnLogin"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
 </RelativeLayout>
