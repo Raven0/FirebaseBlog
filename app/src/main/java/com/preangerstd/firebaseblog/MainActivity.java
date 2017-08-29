@@ -54,15 +54,15 @@ public class MainActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Blog");
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User");
         mDatabaseUser.keepSynced(true);
+        checkUserExist();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        if(mAuth.getCurrentUser() != null){
-            checkUserExist();
-        }
+        /*if(mAuth.getCurrentUser() != null){
+        }*/
 
         mAuth.addAuthStateListener(mAuthListener);
 

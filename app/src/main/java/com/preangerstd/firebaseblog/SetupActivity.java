@@ -85,6 +85,7 @@ public class SetupActivity extends AppCompatActivity {
                     dialogSetup.dismiss();
 
                     Intent goMain = new Intent(SetupActivity.this, MainActivity.class);
+                    goMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(goMain);
                 }
             });
