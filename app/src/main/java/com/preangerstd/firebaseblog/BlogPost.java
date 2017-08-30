@@ -9,15 +9,17 @@ public class BlogPost {
     private String title;
     private String content;
     private String image;
+    private String username;
 
     public BlogPost(){
 
     }
 
-    public BlogPost(String title, String content, String image) {
+    public BlogPost(String title, String content, String image, String username) {
         this.title = title;
         this.content = content;
         this.image = image;
+        this.username = username;
     }
 
     public String getTitle() {
@@ -42,5 +44,13 @@ public class BlogPost {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
             protected void populateViewHolder(PostViewHolder viewHolder, BlogPost model, int position) {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setContent(model.getContent());
+                viewHolder.setUsername(model.getUsername());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
             }
         };
@@ -125,6 +126,11 @@ public class MainActivity extends AppCompatActivity {
         public void setContent(String content){
             TextView postContent = (TextView) mView.findViewById(R.id.postContent);
             postContent.setText(content);
+        }
+
+        public void setUsername(String username){
+            TextView postUser = (TextView) mView.findViewById(R.id.postUser);
+            postUser.setText(username);
         }
 
         public void setImage(Context context, String image){
