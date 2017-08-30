@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,6 +57,8 @@ public class SetupActivity extends AppCompatActivity {
                 startActivityForResult(galleryIntent, GALLERY_REQ);
             }
         });
+
+        Toast.makeText(SetupActivity.this, "Please Setup your Account First", Toast.LENGTH_LONG).show();
 
         btnSetupSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

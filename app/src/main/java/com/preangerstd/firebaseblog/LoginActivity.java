@@ -53,6 +53,9 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intentRegister = new Intent(LoginActivity.this, RegisterActivity.class);
+                intentRegister.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentRegister);
                 
             }
         });

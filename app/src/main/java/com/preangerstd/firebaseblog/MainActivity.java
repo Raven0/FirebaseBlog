@@ -86,24 +86,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkUserExist() {
-        final String userid = mAuth.getCurrentUser().getUid();
+        if(mAuth.getCurrentUser() != null){
+            final String userid = mAuth.getCurrentUser().getUid();
 
-        mDatabaseUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.hasChild(userid)){
-                    Toast.makeText(MainActivity.this, "Please Setup your Account", Toast.LENGTH_LONG).show();
-                    Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
-                    setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(setupIntent);
+            mDatabaseUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(!dataSnapshot.hasChild(userid)){
+                        Toast.makeText(MainActivity.this, "Please Setup your Account", Toast.LENGTH_LONG).show();
+                        Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+                        setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(setupIntent);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder{
