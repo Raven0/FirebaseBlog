@@ -23,15 +23,15 @@
             android:padding="15dp"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:text="Title"/>
+            android:text="Title"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/postContent"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
+            android:padding="15dp"
             android:text="Content"/>
 
         <TextView
@@ -44,6 +44,30 @@
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:text="User"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_empty"
+                android:background="@android:color/transparent"
+                android:id="@+id/btnLike"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_comment"
+                android:background="@android:color/transparent"
+                android:id="@+id/btnComment"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

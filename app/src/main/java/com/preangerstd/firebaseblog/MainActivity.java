@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,8 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView blogList;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabaseUser;
+    private DatabaseReference mDatabaseLike;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private Boolean mLikes = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
         blogList.setHasFixedSize(true);
         blogList.setLayoutManager(new LinearLayoutManager(this));
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Blog");
+        mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Like");
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User");
+        mDatabaseLike.keepSynced(true);
         mDatabaseUser.keepSynced(true);
         checkUserExist();
     }
@@ -74,18 +79,48 @@ public class MainActivity extends AppCompatActivity {
                 mDatabase
         ) {
             @Override
-            protected void populateViewHolder(PostViewHolder viewHolder, BlogPost model, int position) {
+            protected void populateViewHolder(PostViewHolder viewHolder, final BlogPost model, int position) {
 
                 final String postKey = getRef(position).getKey();
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setContent(model.getContent());
                 viewHolder.setUsername(model.getUsername());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
+                viewHolder.setmBtnLike(postKey);
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(MainActivity.this,"You Clicked a Post" + postKey,Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                viewHolder.mBtnLike.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mLikes = true;
+
+                        mDatabaseLike.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                if(mLikes){
+                                    if(dataSnapshot.child(postKey).hasChild(mAuth.getCurrentUser().getUid())){
+                                        mDatabaseLike.child(postKey).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                        mLikes = false;
+                                    }else {
+                                        mDatabaseLike.child(postKey).child(mAuth.getCurrentUser().getUid()).setValue(model.getUsername());
+                                        mLikes = false;
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 });
             }
@@ -122,10 +157,40 @@ public class MainActivity extends AppCompatActivity {
 
         View mView;
 
+        ImageButton mBtnLike;
+
+        DatabaseReference mDatabaseLike;
+        FirebaseAuth mAuth;
+
         public PostViewHolder(View itemView) {
             super(itemView);
 
             mView = itemView;
+
+            mBtnLike = (ImageButton) mView.findViewById(R.id.btnLike);
+
+            mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Like");
+            mDatabaseLike.keepSynced(true);
+
+            mAuth = FirebaseAuth.getInstance();
+        }
+
+        public void setmBtnLike(final String post_key){
+            mDatabaseLike.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+                        mBtnLike.setImageResource(R.mipmap.ic_fill);
+                    }else {
+                        mBtnLike.setImageResource(R.mipmap.ic_empty);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
         public void setTitle(String title){
@@ -140,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
         public void setUsername(String username){
             TextView postUser = (TextView) mView.findViewById(R.id.postUser);
-            postUser.setText(username);
+            postUser.setText("Posted by : " + username);
         }
 
         public void setImage(Context context, String image){
