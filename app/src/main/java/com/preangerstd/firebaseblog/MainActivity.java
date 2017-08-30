@@ -75,10 +75,19 @@ public class MainActivity extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(PostViewHolder viewHolder, BlogPost model, int position) {
+
+                final String postKey = getRef(position).getKey();
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setContent(model.getContent());
                 viewHolder.setUsername(model.getUsername());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(MainActivity.this,"You Clicked a Post" + postKey,Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         };
 
@@ -112,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
     public static class PostViewHolder extends RecyclerView.ViewHolder{
 
         View mView;
+
         public PostViewHolder(View itemView) {
             super(itemView);
 
