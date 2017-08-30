@@ -66,4 +66,15 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
 
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnRegister"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/googleBtn">
+
+    </com.google.android.gms.common.SignInButton>
+
 </RelativeLayout>
