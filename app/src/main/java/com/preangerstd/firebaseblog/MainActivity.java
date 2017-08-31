@@ -91,7 +91,10 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(MainActivity.this,"You Clicked a Post" + postKey,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MainActivity.this,"You Clicked a Post" + postKey,Toast.LENGTH_LONG).show();
+                        Intent singlePost = new Intent(MainActivity.this, SinglePostActivity.class);
+                        singlePost.putExtra("postId",postKey);
+                        startActivity(singlePost);
                     }
                 });
 
@@ -205,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
 
         public void setUsername(String username){
             TextView postUser = (TextView) mView.findViewById(R.id.postUser);
-            postUser.setText("Posted by : " + username);
+            postUser.setText(username);
         }
 
         public void setImage(Context context, String image){

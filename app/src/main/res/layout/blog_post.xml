@@ -8,6 +8,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/postUser"
+        android:textStyle="bold"
+        android:textSize="12dp"
+        android:padding="10dp"
+        android:text="User"/>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,17 +42,6 @@
             android:id="@+id/postContent"
             android:padding="15dp"
             android:text="Content"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/postUser"
-            android:textStyle="bold"
-            android:textSize="12dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:text="User"/>
 
         <LinearLayout
             android:layout_width="match_parent"

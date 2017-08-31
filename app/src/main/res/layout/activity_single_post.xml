@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.preangerstd.firebaseblog.SinglePostActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/singleUser"
+        android:textStyle="bold"
+        android:textSize="12dp"
+        android:padding="10dp"
+        android:text="User"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/singleImage"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/image_one"
+        android:layout_below="@id/singleUser"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/singleTitle"
+        android:padding="15dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="Title"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:layout_below="@id/singleImage"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/singleContent"
+        android:padding="15dp"
+        android:text="Content"
+        android:layout_below="@id/singleTitle"/>
+
+    <Button
+        android:id="@+id/btnDeletePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:text="Delete post"
+        android:textColor="@android:color/white"
+        android:visibility="invisible"/>
+
+</RelativeLayout>
